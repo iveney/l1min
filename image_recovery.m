@@ -1,5 +1,7 @@
-addpath ../l1magic/Measurements
-addpath ../l1magic/Data
+% Reference: l1 magic document
+
+% addpath ../l1magic/Measurements
+% addpath ../l1magic/Data
 
 IM = imread('cameraman.tif');
 n = size(IM, 1);
@@ -12,10 +14,6 @@ L = 22;
 [M, Mh, mh, mhi] = LineMask(L, n);
 OMEGA = mhi;
 K = length(OMEGA);
-
-% Measurement matrix size = length(OMEGA) x (n*n)
-% A = @(z) A_fhp(z, OMEGA);
-% At = @(z) At_fhp(z, OMEGA, n);
 
 % coefficients
 coef = fft2(IM); % explain why 1/n
@@ -49,12 +47,12 @@ I2 = mat2gray(I2);       % renormalize
 % title('Min energy reconstruction');
 imwrite(I2, 'I2.png');
 
-
 % l1 reconstruction
-[x1] = lasso(A, b, 'Lambda', 1e-2);
+[x1] = lasso(A, b, 'Lambda', .7);
 c1 = sqrt(2)*reshape(x1(2:N+1) + i*x1(N+2:end), n, n);
 c1(1,1) = b(1);
 I1 = real(n*ifft2(c1));
+I1 = mat2gray(I1);       % renormalize
 % figure, imshow(I1);
 % title('L1 reconstruction');
 imwrite(I1, 'I1.png');
