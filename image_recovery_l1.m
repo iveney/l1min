@@ -7,6 +7,10 @@ IM = imread('cameraman.tif');
 n = size(IM, 1);
 N = n*n;
 
+% Uncomment the following to use the phantom image come with l1magic
+% addpath ../l1magic/Data
+% IM = phantom(n);
+
 % number of radial lines in the Fourier domain
 L = 22;
 
@@ -14,6 +18,12 @@ L = 22;
 [M, Mh, mh, mhi] = LineMask(L, n);
 OMEGA = mhi;
 K = length(OMEGA);
+
+% Uncomment the following to use random measurement matrix
+% K = 3000;
+% OMEGA = randperm(N);
+% OMEGA = OMEGA(1:K)';
+
 A = @(z) A_fhp(z, OMEGA);
 At = @(z) At_fhp(z, OMEGA, n);
 
