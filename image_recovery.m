@@ -51,7 +51,7 @@ imwrite(I2, 'I2.png');
 
 
 % l1 reconstruction
-[x1] = lasso(Mcomb, b, 'Lambda', 1e-2);
+[x1] = lasso(A, b, 'Lambda', 1e-2);
 c1 = sqrt(2)*reshape(x1(2:N+1) + i*x1(N+2:end), n, n);
 c1(1,1) = b(1);
 I1 = real(n*ifft2(c1));
