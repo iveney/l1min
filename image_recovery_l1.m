@@ -1,7 +1,7 @@
 % Reference: l1 magic document
 
 addpath ../l1magic/Measurements
-addpath ../l1magic/Data
+addpath ../l1magic/Optimization
 
 IM = imread('cameraman.tif');
 n = size(IM, 1);
