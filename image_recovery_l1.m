@@ -18,7 +18,7 @@ A = @(z) A_fhp(z, OMEGA);
 At = @(z) At_fhp(z, OMEGA, n);
 
 % observations
-y = A(x);
+y = A(IM(:));
 
 % min l2 reconstruction (backprojection)
 xbp = At(y);
